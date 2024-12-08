@@ -34,7 +34,14 @@ const HomePage = () => {
   }, [showToast, setPosts]);
 
   return (
-    <Flex gap='10' alignItems={"flex-start"}>
+    <Flex
+      direction={{
+        base: "column",
+        md: "row",
+      }}
+      gap="10"
+      alignItems={"flex-start"}
+    >
       <Box flex={70}>
         {!loading && posts.length === 0 && (
           <h1>Sigue a algun usuario para ver el feed</h1>
@@ -49,11 +56,12 @@ const HomePage = () => {
           <Post key={post._id} post={post} postedBy={post.postedBy} />
         ))}
       </Box>
-      <Box flex={30}
-        display={{
-          base: "none",
-          md: "block",
-      }}
+      <Box
+        flex={30}
+        mt={{
+          base: "6", 
+          md: "0", 
+        }}
       >
         <SuggestedUsers />
       </Box>
