@@ -39,7 +39,7 @@ const signupUser = async (req, res) => {
       });
     }
 
-    // Validación opcional de complejidad (puedes eliminar si no es necesario)
+    
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{4,}$/;
     if (!passwordRegex.test(password)) {
       return res.status(400).json({
