@@ -31,6 +31,22 @@ const getUserProfile = async (req, res) => {
 const signupUser = async (req, res) => {
   try {
     const { name, email, username, password } = req.body;
+
+    // Validar longitud mínima de la contraseña
+    if (!password || password.length < 4) {
+      return res.status(400).json({
+        error: "La contraseña debe tener al menos 4 caracteres.",
+      });
+    }
+
+    // Validación opcional de complejidad (puedes eliminar si no es necesario)
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{4,}$/;
+    if (!passwordRegex.test(password)) {
+      return res.status(400).json({
+        error:
+          "La contraseña debe incluir al menos una letra y un número. Longitud mínima: 4 caracteres.",
+      });
+    }
     const user = await User.findOne({ $or: [{ email }, { username }] });
 
     if (user) {
